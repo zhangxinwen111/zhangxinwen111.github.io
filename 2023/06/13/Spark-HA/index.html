@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,inital-scale=1,user-scalable=no">
+  <title>Spark-HA [ Hexo ]</title>
+  <!-- bootstrapcss文件 -->
+ <!--  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+<!--   
+<link rel="stylesheet" href="/css/zhl.css">
+
+ -->
+  
+    <!-- stylesheets list from config.yml -->
+    
+      <link rel="stylesheet" href="/css/fork-awesome.min.css">
+    
+      <link rel="stylesheet" href="/css/zhl.css">
+    
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body>
+<div class="container-fluid">
+  <div class="row">
+  <div id="wrap" class="col-md-12">
+    <div id="header">
+	<div id="header-left">
+	<h1 id="header-title"> 
+	<a href="/">
+		Hexo
+	</a>
+	</h1>
+	
+	</div>
+	<div id="header-right">
+		
+		
+		<a href="/"  title="home"><i class="fa fa-home ">home</i></a>
+		
+		<a target="_blank" rel="noopener" href="https://github.com/lizehongss/demo_show"  title="demo"><i class="fa fa-code ">demo</i></a>
+		
+		<a href="/about"  title="about"><i class="fa fa-user ">about</i></a>
+		
+		<a href="/"  title="music"><i class="fa fa-music ">music</i></a>
+		
+		
+	</div>
+</div>
+
+  </div>
+  </div>
+  <div id="content" class="row">
+    <div id="content-left" class="col-md-4">
+      
+
+	
+
+	
+
+	
+	<div class="widget-wrap">
+		<h3 class="widget-title fa fa-archive">归档</h3>
+		<div class="widget">
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">8</span></li></ul>
+		</div>
+	</div>
+
+
+
+    </div>
+    <div id="content-right" class="col-md-8">
+    
+<article id="post">
+	<div class="post-title">
+  <h1>Spark-HA</h1>
+  	</div>
+  <div class="page-meta">
+  	<span class="fa-wrap">
+  		<i class="fa fa-clock-o"></i>
+  		<span class="date-meta">2023-06-13</span>
+  	</span>
+  	<span class="fa-wrap">
+  		
+  	</span>
+  	<span class="fa-wrap">
+  		
+  	</span>
+  </div>
+  <div class="post-content">
+  <h1 id="spark-stand-alone-HA环境搭建"><a href="#spark-stand-alone-HA环境搭建" class="headerlink" title="spark stand alone HA环境搭建"></a>spark stand alone HA环境搭建</h1><p>Spark Standalone HA用于提高 Spark 集群的可用性和容错能力。此部署方式使用多个 Spark master节点来实现故障切换和负载均衡，从而确保即使某个节点发生故障或者停机，Spark 集群仍然可以继续工作。</p>
+<span id="more"></span>
+
+<h2 id="修改spark-env-sh文件"><a href="#修改spark-env-sh文件" class="headerlink" title="修改spark-env.sh文件"></a>修改spark-env.sh文件</h2><p>spark.deploy.recoveryMode 指定HA模式 基于Zookeeper实现，指定Zookeeper的连接地址和Zookeeper中注册临时节点的路径<br>删除文件中的SPARK_MASTER_HOST&#x3D;node1<br><img src="/spark-HA/clip_image002.jpg" alt="img"></p>
+<p>增加<br>SPARK_DAEMON_JAVA_OPTS&#x3D;”-Dspark.deploy.recoveryMode&#x3D;ZOOKEEPER -Dspark.deploy.zookeeper.url&#x3D;node1:2181,node2:2181,node3:2181 -Dspark.deploy.zookeeper.dir&#x3D;&#x2F;spark-ha”</p>
+<h2 id="把node1上配置好的spark-env-sh发送到node2和node3上"><a href="#把node1上配置好的spark-env-sh发送到node2和node3上" class="headerlink" title="把node1上配置好的spark-env.sh发送到node2和node3上"></a>把node1上配置好的spark-env.sh发送到node2和node3上</h2><p>scp spark-env.sh node2:&#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;<br>scp spark-env.sh node3:&#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;<br><img src="/spark-HA/clip_image004.jpg" alt="img"></p>
+<h2 id="首先要保证三台虚拟机上当前的standalone集群是停止的"><a href="#首先要保证三台虚拟机上当前的standalone集群是停止的" class="headerlink" title="首先要保证三台虚拟机上当前的standalone集群是停止的"></a>首先要保证三台虚拟机上当前的standalone集群是停止的</h2><p>sbin&#x2F;stop-all.sh<br><img src="/spark-HA/clip_image006.jpg" alt="img"></p>
+<h2 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h2><p>在node1上 启动一个master 和全部worker<br>sbin&#x2F;start-all.sh<br><img src="/spark-HA/clip_image008.jpg" alt="img"><br>node2上进程<br><img src="/spark-HA/clip_image010.jpg" alt="img"><br>node3上进程<br><img src="/spark-HA/clip_image012.jpg" alt="img"><br>web网页上查看<br><img src="/spark-HA/clip_image014.jpg" alt="img"></p>
+<p>在node2上启动一个备用的master进程<br>sbin&#x2F;start-master.sh<br><img src="/spark-HA/clip_image016.jpg" alt="img"><br>到web端查看<br><img src="/spark-HA/clip_image018.jpg" alt="img"></p>
+<h2 id="master注备切换"><a href="#master注备切换" class="headerlink" title="master注备切换"></a>master注备切换</h2><p>提交spark任务到alivemaster上<br>bin&#x2F;spark-submit –master spark:&#x2F;&#x2F;node1:7077 &#x2F;export&#x2F;server&#x2F;spark&#x2F;examples&#x2F;src&#x2F;main&#x2F;python&#x2F;pi.py 1000<br><img src="/spark-HA/clip_image022.jpg" alt="img"><br>提交完成后kill掉node1的master<br><img src="/spark-HA/clip_image020.jpg" alt="img"></p>
+
+	</div>
+</article>
+
+
+
+    </div>
+  </div>
+  <div class="row">
+<div id="bottom" class="col-md-12"> 
+  <div class="bottom-nav">
+	
+	
+	<a href="https://github.com/lizehongss" class="fa fa-github fa-2x" target="_blank" title="Follow me" ></a>
+	
+	
+</div>
+<div class="bottom-info">
+	&copy; 2023 John Doe<br>
+	Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+	theme <a href="https://github.com/lizehongss/hexo-theme-zhl" target="_blank">zhl</a>
+</div>
+</div>
+</div>
+</div>
+<div id="tool">
+  <ul>
+    <li class="fa fa-angle-up top" id="top"></li>
+  </ul>
+</div>
+  <div class="bg_content">
+    <canvas id="canvas"></canvas>
+  </div>
+  
+  <!-- scripts list from theme config.yml -->
+  
+    <script src="/js/zhl.js"></script>
+  
+    <script src="/js/bj.js"></script>
+  
+
+<!-- jQ cdn  -->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<!-- bootstrap js cdn-->
+<!-- <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
+
+
+</body>
+</html>
