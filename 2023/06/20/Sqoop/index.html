@@ -65,7 +65,7 @@
 	<div class="widget-wrap">
 		<h3 class="widget-title fa fa-archive">归档</h3>
 		<div class="widget">
-			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">11</span></li></ul>
+			<ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">12</span></li></ul>
 		</div>
 	</div>
 
@@ -91,8 +91,7 @@
   	</span>
   </div>
   <div class="post-content">
-  <p><em><strong>*Sqoop*</strong></em></p>
-<p>Sqoop可以将关系型数据库（RDBMS）的数据导入（import）hadoop生态系统中，例如将RDBMS中的表导入到HDFS中或将数据加载到hive表中；将hadoop生态系统中的数据导出（export）到关系型数据库中，以此可以使用传统的sql查询工具进行数据分析。Sqoop支持多重数据库，mysql、oracle、postgresoql等。</p>
+  <h1 id="Sqoop"><a href="#Sqoop" class="headerlink" title="Sqoop"></a>Sqoop</h1><p>Sqoop可以将关系型数据库（RDBMS）的数据导入（import）hadoop生态系统中，例如将RDBMS中的表导入到HDFS中或将数据加载到hive表中；将hadoop生态系统中的数据导出（export）到关系型数据库中，以此可以使用传统的sql查询工具进行数据分析。Sqoop支持多重数据库，mysql、oracle、postgresoql等。</p>
 <p>此处以node2为例</p>
 <p>1.sqoop安装</p>
 <p>（1）基础环境</p>
@@ -168,11 +167,11 @@
 <p> <code>phno</code> varchar(100) DEFAULT NULL,</p>
 <p> <code>email</code> varchar(100) DEFAULT NULL</p>
 <p>) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;latin1;</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1201’, ‘2356742’, ‘<a href="mailto:&#103;&#111;&#x70;&#97;&#108;&#x40;&#x74;&#x70;&#46;&#99;&#111;&#109;">&#103;&#111;&#x70;&#97;&#108;&#x40;&#x74;&#x70;&#46;&#99;&#111;&#109;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1202’, ‘1661663’, ‘<a href="mailto:&#x6d;&#97;&#x6e;&#x69;&#x73;&#104;&#x61;&#x40;&#x74;&#112;&#x2e;&#99;&#111;&#x6d;">&#x6d;&#97;&#x6e;&#x69;&#x73;&#104;&#x61;&#x40;&#x74;&#112;&#x2e;&#99;&#111;&#x6d;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1203’, ‘8887776’, ‘<a href="mailto:&#107;&#104;&#x61;&#108;&#105;&#108;&#x40;&#x61;&#x63;&#x2e;&#x63;&#111;&#109;">&#107;&#104;&#x61;&#108;&#105;&#108;&#x40;&#x61;&#x63;&#x2e;&#x63;&#111;&#109;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1204’, ‘9988774’, ‘<a href="mailto:&#x70;&#114;&#97;&#115;&#x61;&#110;&#116;&#x68;&#x40;&#97;&#99;&#x2e;&#x63;&#111;&#109;">&#x70;&#114;&#97;&#115;&#x61;&#110;&#116;&#x68;&#x40;&#97;&#99;&#x2e;&#x63;&#111;&#109;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1205’, ‘1231231’, ‘<a href="mailto:&#107;&#114;&#97;&#x6e;&#x74;&#104;&#105;&#x40;&#x74;&#112;&#46;&#99;&#111;&#109;">&#107;&#114;&#97;&#x6e;&#x74;&#104;&#105;&#x40;&#x74;&#112;&#46;&#99;&#111;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1201’, ‘2356742’, ‘<a href="mailto:&#x67;&#111;&#x70;&#97;&#x6c;&#64;&#x74;&#x70;&#46;&#x63;&#111;&#x6d;">&#x67;&#111;&#x70;&#97;&#x6c;&#64;&#x74;&#x70;&#46;&#x63;&#111;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1202’, ‘1661663’, ‘<a href="mailto:&#x6d;&#97;&#110;&#105;&#115;&#x68;&#x61;&#64;&#116;&#x70;&#46;&#x63;&#x6f;&#x6d;">&#x6d;&#97;&#110;&#105;&#115;&#x68;&#x61;&#64;&#116;&#x70;&#46;&#x63;&#x6f;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1203’, ‘8887776’, ‘<a href="mailto:&#x6b;&#x68;&#x61;&#108;&#x69;&#x6c;&#64;&#97;&#x63;&#46;&#99;&#111;&#109;">&#x6b;&#x68;&#x61;&#108;&#x69;&#x6c;&#64;&#97;&#x63;&#46;&#99;&#111;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1204’, ‘9988774’, ‘<a href="mailto:&#x70;&#x72;&#x61;&#115;&#97;&#x6e;&#116;&#104;&#64;&#97;&#99;&#46;&#99;&#111;&#x6d;">&#x70;&#x72;&#x61;&#115;&#97;&#x6e;&#116;&#104;&#64;&#97;&#99;&#46;&#99;&#111;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1205’, ‘1231231’, ‘<a href="mailto:&#107;&#114;&#x61;&#x6e;&#116;&#x68;&#x69;&#x40;&#116;&#x70;&#x2e;&#99;&#x6f;&#109;">&#107;&#114;&#x61;&#x6e;&#116;&#x68;&#x69;&#x40;&#116;&#x70;&#x2e;&#99;&#x6f;&#109;</a>‘);</p>
 <p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps157.jpg" alt="img"> </p>
 <p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps158.jpg" alt="img"> </p>
 <p>（2）全量导入mysql表数据到HDFS</p>
