@@ -6,7 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,inital-scale=1,user-scalable=no">
-  <title> [ Hexo ]</title>
+  <title>Sqoop [ Hexo ]</title>
   <!-- bootstrapcss文件 -->
  <!--  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
 <!--   
@@ -76,7 +76,7 @@
     
 <article id="post">
 	<div class="post-title">
-  <h1></h1>
+  <h1>Sqoop</h1>
   	</div>
   <div class="page-meta">
   	<span class="fa-wrap">
@@ -167,11 +167,11 @@
 <p> <code>phno</code> varchar(100) DEFAULT NULL,</p>
 <p> <code>email</code> varchar(100) DEFAULT NULL</p>
 <p>) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;latin1;</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1201’, ‘2356742’, ‘<a href="mailto:&#103;&#111;&#x70;&#x61;&#x6c;&#x40;&#116;&#x70;&#x2e;&#x63;&#111;&#x6d;">&#103;&#111;&#x70;&#x61;&#x6c;&#x40;&#116;&#x70;&#x2e;&#x63;&#111;&#x6d;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1202’, ‘1661663’, ‘<a href="mailto:&#109;&#x61;&#x6e;&#x69;&#x73;&#x68;&#97;&#x40;&#x74;&#x70;&#x2e;&#x63;&#x6f;&#109;">&#109;&#x61;&#x6e;&#x69;&#x73;&#x68;&#97;&#x40;&#x74;&#x70;&#x2e;&#x63;&#x6f;&#109;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1203’, ‘8887776’, ‘<a href="mailto:&#x6b;&#104;&#97;&#108;&#105;&#x6c;&#x40;&#97;&#x63;&#46;&#x63;&#x6f;&#109;">&#x6b;&#104;&#97;&#108;&#105;&#x6c;&#x40;&#97;&#x63;&#46;&#x63;&#x6f;&#109;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1204’, ‘9988774’, ‘<a href="mailto:&#x70;&#x72;&#97;&#x73;&#97;&#110;&#116;&#104;&#x40;&#97;&#x63;&#x2e;&#x63;&#x6f;&#109;">&#x70;&#x72;&#97;&#x73;&#97;&#110;&#116;&#104;&#x40;&#97;&#x63;&#x2e;&#x63;&#x6f;&#109;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1205’, ‘1231231’, ‘<a href="mailto:&#x6b;&#x72;&#97;&#x6e;&#116;&#104;&#105;&#64;&#116;&#x70;&#46;&#x63;&#111;&#x6d;">&#x6b;&#x72;&#97;&#x6e;&#116;&#104;&#105;&#64;&#116;&#x70;&#46;&#x63;&#111;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1201’, ‘2356742’, ‘<a href="mailto:&#x67;&#111;&#112;&#97;&#108;&#x40;&#116;&#x70;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#111;&#112;&#97;&#108;&#x40;&#116;&#x70;&#x2e;&#x63;&#x6f;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1202’, ‘1661663’, ‘<a href="mailto:&#109;&#x61;&#x6e;&#x69;&#x73;&#x68;&#97;&#x40;&#x74;&#x70;&#46;&#99;&#x6f;&#109;">&#109;&#x61;&#x6e;&#x69;&#x73;&#x68;&#97;&#x40;&#x74;&#x70;&#46;&#99;&#x6f;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1203’, ‘8887776’, ‘<a href="mailto:&#107;&#104;&#97;&#x6c;&#x69;&#108;&#x40;&#97;&#99;&#x2e;&#99;&#111;&#x6d;">&#107;&#104;&#97;&#x6c;&#x69;&#108;&#x40;&#97;&#99;&#x2e;&#99;&#111;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1204’, ‘9988774’, ‘<a href="mailto:&#x70;&#x72;&#x61;&#115;&#97;&#110;&#x74;&#x68;&#64;&#97;&#x63;&#x2e;&#x63;&#111;&#109;">&#x70;&#x72;&#x61;&#115;&#97;&#110;&#x74;&#x68;&#64;&#97;&#x63;&#x2e;&#x63;&#111;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1205’, ‘1231231’, ‘<a href="mailto:&#107;&#x72;&#97;&#110;&#116;&#x68;&#105;&#x40;&#x74;&#x70;&#46;&#x63;&#111;&#109;">&#107;&#x72;&#97;&#110;&#116;&#x68;&#105;&#x40;&#x74;&#x70;&#46;&#x63;&#111;&#109;</a>‘);</p>
 <p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps157.jpg" alt="img"> </p>
 <p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps158.jpg" alt="img"> </p>
 <p>（2）全量导入mysql表数据到HDFS</p>
@@ -340,7 +340,7 @@
 <p>bin&#x2F;sqoop export –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table allowinsert –export-dir &#x2F;sqoop&#x2F;allowinsert_2&#x2F; –update-key id –update-mode allowinsert</p>
 <p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps199.jpg" alt="img"> </p>
 <p>7）查看结果</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps200.jpg" alt="img"> </p>
+<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps200.jpg" alt="img"></p>
 
 	</div>
 </article>
