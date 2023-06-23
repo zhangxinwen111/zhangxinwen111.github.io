@@ -81,7 +81,7 @@
   <div class="page-meta">
   	<span class="fa-wrap">
   		<i class="fa fa-clock-o"></i>
-  		<span class="date-meta">2023-06-13</span>
+  		<span class="date-meta">2023-06-23</span>
   	</span>
   	<span class="fa-wrap">
   		
@@ -94,19 +94,7 @@
   <h1 id="Spark本地全流程配置及操作"><a href="#Spark本地全流程配置及操作" class="headerlink" title="Spark本地全流程配置及操作"></a>Spark本地全流程配置及操作</h1><span id="more"></span>
 
 
-<h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h1 id="配置Spark有如下5个环境变量需要设置"><a href="#配置Spark有如下5个环境变量需要设置" class="headerlink" title="配置Spark有如下5个环境变量需要设置"></a>配置Spark有如下5个环境变量需要设置</h1><p>#JAVA_HOME</p>
-<p>export JAVA_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;jdk</p>
-<p>export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</p>
-<p>export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</p>
-<p>#HADOOP_HOME</p>
-<p>export HADOOP_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;hadoop</p>
-<p>export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin:$HADOOP_HOME&#x2F;sbin</p>
-<p>#HADOOP_CONF_DIR</p>
-<p>export HADOOP_CONF_DIR&#x3D;$HADOOP_HOME&#x2F;etc&#x2F;hadoop</p>
-<p>#PYSPARK_PYTHON</p>
-<p>export PYSPARK_PYTHON&#x3D;&#x2F;export&#x2F;server&#x2F;anaconda3&#x2F;envs&#x2F;pyspark&#x2F;bin&#x2F;python</p>
-<p>#SPARK_HOME</p>
-<p>export SPARK_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;spark</p>
+<h2 id="基础环境"><a href="#基础环境" class="headerlink" title="基础环境"></a>基础环境</h2><h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><h1 id="配置Spark有如下5个环境变量需要设置"><a href="#配置Spark有如下5个环境变量需要设置" class="headerlink" title="配置Spark有如下5个环境变量需要设置"></a>配置Spark有如下5个环境变量需要设置</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#JAVA_HOME</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/export/server/jdk</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line"></span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"></span><br><span class="line">#HADOOP_HOME</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME=/export/server/hadoop</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br><span class="line"></span><br><span class="line">#HADOOP_CONF_DIR</span><br><span class="line"></span><br><span class="line">export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop</span><br><span class="line"></span><br><span class="line">#PYSPARK_PYTHON</span><br><span class="line"></span><br><span class="line">export PYSPARK_PYTHON=/export/server/anaconda3/envs/pyspark/bin/python</span><br><span class="line"></span><br><span class="line">#SPARK_HOME</span><br><span class="line"></span><br><span class="line">export SPARK_HOME=/export/server/spark</span><br></pre></td></tr></table></figure>
 <p><img src="/spark-local/clip_image002.jpg" alt="img"></p>
 <h1 id="安装anaconda"><a href="#安装anaconda" class="headerlink" title="安装anaconda"></a>安装anaconda</h1><p>把资源包Anaconda3-2021.05-Linux-x86_64.sh文件放到文件夹下</p>
 <p><img src="/spark-local/clip_image004.jpg" alt="img"></p>
@@ -114,9 +102,8 @@
 <p>sh .&#x2F;Anaconda3-2021.05-Linux-x86_64.sh</p>
 <p><img src="/spark-local/clip_image006.jpg" alt="img"></p>
 <p>输入安装路径</p>
-<p>&#x2F;export&#x2F;server&#x2F;anaconda3</p>
 <p><img src="/spark-local/clip_image008.jpg" alt="img"></p>
-<p><img src="/spark-local/clip_image010.jpg" alt="img"></p>
+<p>&#x2F;export&#x2F;server&#x2F;anaconda3<br><img src="/spark-local/clip_image010.jpg" alt="img"></p>
 <p>安装完成之后重启虚拟机</p>
 <p>看到base（默认的虚拟环境）开头就安装好了</p>
 <p><img src="/spark-local/clip_image012.jpg" alt="img"></p>

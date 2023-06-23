@@ -81,7 +81,7 @@
   <div class="page-meta">
   	<span class="fa-wrap">
   		<i class="fa fa-clock-o"></i>
-  		<span class="date-meta">2023-06-20</span>
+  		<span class="date-meta">2023-06-23</span>
   	</span>
   	<span class="fa-wrap">
   		
@@ -91,31 +91,31 @@
   	</span>
   </div>
   <div class="post-content">
-  <h1 id="Flume"><a href="#Flume" class="headerlink" title="Flume"></a>Flume</h1><p>1.安装flume</p>
+  <p>1.安装flume</p>
 <p>（1）解压</p>
 <p>把apache-flume-1.9.0-bin.tar.gz进行解压</p>
 <p>tar zxvf apache-flume-1.9.0-bin.tar.gz</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps47.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image002.jpg" alt="img"></p>
 <p>（2）添加软链接</p>
 <p>ln -s apache-flume-1.9.0-bin flume</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps48.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image004.jpg" alt="img"></p>
 <p>（3）配置环境变量</p>
 <p>在&#x2F;etc&#x2F;profile文件中添加以下语句</p>
 <p>#FLUME_HOME</p>
 <p>export FLUME_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;flume</p>
 <p>export PATH&#x3D;$PATH:$FLUME_HOME&#x2F;bin</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps49.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image006.jpg" alt="img"></p>
 <p>（4）刷新profile文件</p>
 <p>source &#x2F;etc&#x2F;profile</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps50.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image008.jpg" alt="img"></p>
 <p>（5）查看是否设置成功</p>
 <p>echo $FLUME_HOME</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps51.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image010.jpg" alt="img"></p>
 <p>2.基本使用</p>
 <p>可以使用flume监听某个端口，人后用netca向这个端口发送数据，flume将接收到的数据打印到控制台上</p>
 <p>（1）安装netcat</p>
 <p>yum install -y nc</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps52.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image012.jpg" alt="img"></p>
 <p>（2）添加配置文件</p>
 <p>在netcat-logger.conf中添加以下语句</p>
 <p># example1-netcat-logger.conf: 单节点Flume配置</p>
@@ -138,17 +138,17 @@
 <p>a1.sinks.k1.type &#x3D; logger</p>
 <p># 将sink绑定到channel上</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps53.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image014.png" alt="img"></p>
 <p>（3）启动</p>
 <p>1）启动agent</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example1-netcat-logger.conf -Dflume.root.logger&#x3D;INFO,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps54.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image016.png" alt="img"></p>
 <p>（4）测试</p>
 <p>1）使用Netcat测试</p>
 <p>nc node1 44444</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps55.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image018.jpg" alt="img"></p>
 <p>2）观察agent控制台</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps56.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image020.jpg" alt="img"></p>
 <p>3.exec_source测试</p>
 <p>（1）配置文件</p>
 <p>在example2-exec-source-logger.conf添加以下语句</p>
@@ -165,23 +165,23 @@
 <p>a1.channels.c1.transactionCapacity &#x3D; 100</p>
 <p>a1.sinks.k1.type &#x3D; logger</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps57.png" alt="img"> </p>
+<p><img src="/flume/clip_image022.jpg" alt="img"></p>
 <p>（2）启动测试</p>
 <p>1）准备日志文件</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps58.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image024.jpg" alt="img"></p>
 <p>2）准备一个脚本，往日志文件中持续写入数据</p>
 <p>在脚本中写入以下语句</p>
 <p>for i in {1..100}; </p>
-<p>do echo ${i} “bigdata log” &gt;&gt;  access.log ; </p>
+<p>do echo ${i} “bigdata log” &gt;&gt; access.log ; </p>
 <p>sleep 0.5; </p>
 <p>done</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps59.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image026.jpg" alt="img"></p>
 <p>3）启动flume采集</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example2-exec-source-logger.conf -Dflume.root.logger&#x3D;INFO,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps60.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image028.jpg" alt="img"></p>
 <p>运行脚本</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps61.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps62.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image030.jpg" alt="img"></p>
+<p><img src="/flume/clip_image032.png" alt="img"></p>
 <p>\4. spooldir_source测试</p>
 <p>（1）配置文件</p>
 <p>在example3-spooldir-source.conf文件中添加以下语句</p>
@@ -197,10 +197,10 @@
 <p>a1.channels.c1.transactionCapacity &#x3D; 100</p>
 <p>a1.sinks.k1.type &#x3D; logger</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps63.png" alt="img"> </p>
+<p><img src="/flume/clip_image034.jpg" alt="img"></p>
 <p>（2）启动测试</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example3-spooldir-source.conf -Dflume.root.logger&#x3D;INFO,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps64.png" alt="img"> </p>
+<p><img src="/flume/clip_image036.jpg" alt="img"></p>
 <p>\5. taildir_source测试</p>
 <p>（1）配置文件</p>
 <p>在example4-taildir-source.conf中添加以下语句</p>
@@ -228,10 +228,10 @@
 <p>a1.channels.c1.transactionCapacity &#x3D; 1000</p>
 <p>a1.sinks.k1.type &#x3D; logger</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps65.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image038.jpg" alt="img"></p>
 <p>（2）启动测试</p>
-<p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f  myconf&#x2F;example4-taildir-source.conf -Dflume.root.logger&#x3D;INFO,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps66.jpg" alt="img"> </p>
+<p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example4-taildir-source.conf -Dflume.root.logger&#x3D;INFO,console</p>
+<p><img src="/flume/clip_image040.jpg" alt="img"></p>
 <p>6.avro source</p>
 <p>（1）配置文件</p>
 <p>在example5-avro-source.conf文件中添加以下语句</p>
@@ -250,11 +250,11 @@
 <p>a1.sinks.k1.channel &#x3D; c1</p>
 <p>（2）启动测试</p>
 <p>1）启动agent</p>
-<p>bin&#x2F;flume-ng agent -c conf -f  myconf&#x2F;example5-avro-source.conf -n a1 -Dflume.root.logger&#x3D;INFO,console  </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps67.jpg" alt="img"> </p>
+<p>bin&#x2F;flume-ng agent -c conf -f myconf&#x2F;example5-avro-source.conf -n a1 -Dflume.root.logger&#x3D;INFO,console </p>
+<p><img src="/flume/clip_image042.png" alt="img"></p>
 <p>2）新建avro-log.txt</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps68.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps69.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image044.jpg" alt="img"></p>
+<p><img src="/flume/clip_image046.png" alt="img"></p>
 <p>7.使用File Channel</p>
 <p>实现数据持久化</p>
 <p>（1）配置文件</p>
@@ -284,21 +284,21 @@
 <p># source同时绑定到c1和c2上</p>
 <p>a1.sources.r1.channels &#x3D; c1 c2</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps70.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image048.jpg" alt="img"></p>
 <p>（2）可以将-Dflume.root.logger&#x3D;INFO,console添加在conf的环境配置中</p>
 <p>cp flume-env.sh.template flume-env.sh</p>
 <p>在flume-env.sh中添加JAVA_OPTS</p>
 <p>export JAVA_OPTS&#x3D;”-Dflume.root.logger&#x3D;INFO,console”</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps71.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image050.jpg" alt="img"></p>
 <p>（3）启动flume</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example6-file-channel.conf -Dflume.root.logger&#x3D;INFO,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps72.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image052.jpg" alt="img"></p>
 <p>（4）关闭Flume，修改配置文件</p>
 <p># 将sink绑定到c2上</p>
 <p>a1.sinks.k1.channel &#x3D; c2</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps73.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image054.jpg" alt="img"></p>
 <p>（5）重启Flume，可以看到会重新消费c2的数据</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps74.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image056.jpg" alt="img"></p>
 <p>\8. 利用avro source和avro sink实现agent级联</p>
 <p>（1）配置文件</p>
 <p>1）在上游node1和node2上配置example7-1-taildir-f-avro.conf</p>
@@ -332,9 +332,9 @@
 <p>#下游目标主机、端口</p>
 <p>a1.sinks.k1.hostname &#x3D; node3</p>
 <p>a1.sinks.k1.port &#x3D; 44444</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps75.png" alt="img"> </p>
+<p><img src="/flume/clip_image058.jpg" alt="img"></p>
 <p>2）在下游服务器node3上配置example7-2-avro-f-hdfs.conf</p>
-<p>vim example7-2-avro-f-hdfs.conf	</p>
+<p>vim example7-2-avro-f-hdfs.conf </p>
 <p>#下游服务器配置 example7-2-avro-f-hdfs.conf</p>
 <p>a1.sources &#x3D; r1</p>
 <p>a1.channels &#x3D; c1</p>
@@ -367,34 +367,34 @@
 <p>a1.sinks.k1.hdfs.batchSize &#x3D; 1000</p>
 <p>a1.sinks.k1.hdfs.codeC &#x3D; gzip</p>
 <p>a1.sinks.k1.hdfs.fileType &#x3D; CompressedStream</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps76.png" alt="img"> </p>
+<p><img src="/flume/clip_image060.jpg" alt="img"></p>
 <p>（2）启动hdfs</p>
 <p>start-all.sh</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps77.png" alt="img"> </p>
+<p><img src="/flume/clip_image062.jpg" alt="img"></p>
 <p>（3）启动下游node3上的flume agent</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example7-2-avro-f-hdfs.conf -Dflume.root.logger&#x3D;DEBUG,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps78.png" alt="img"> </p>
+<p><img src="/flume/clip_image064.jpg" alt="img"></p>
 <p>（4）在node1和node2上准备两个日志</p>
 <p>mkdir &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;weblog&#x2F;</p>
 <p>mkdir &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;wxlog&#x2F;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps79.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps80.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image066.jpg" alt="img"></p>
+<p><img src="/flume/clip_image068.jpg" alt="img"></p>
 <p>（5）在node1和node2上利用shell脚本生成日志数据</p>
 <p>while true</p>
 <p>do</p>
 <p>echo webwebwebwebweb &gt;&gt; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;weblog&#x2F;web-access.log</p>
-<p>echo wxwxwxwxwxwxwx  &gt;&gt; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;wxlog&#x2F;wx-access.log </p>
+<p>echo wxwxwxwxwxwxwx &gt;&gt; &#x2F;export&#x2F;data&#x2F;flume-example-data&#x2F;wxlog&#x2F;wx-access.log </p>
 <p>sleep 0.01</p>
 <p>done</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps81.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image070.jpg" alt="img"></p>
 <p>（6）启动node1和node2上的flume agent</p>
 <p>nohup bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example7-1-taildir-f-avro.conf 1&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps82.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps83.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image072.jpg" alt="img"></p>
+<p><img src="/flume/clip_image074.jpg" alt="img"></p>
 <p>（7）运行脚本，同时查看node3状态和脚本运行结果</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps84.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps85.png" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps86.png" alt="img"> </p>
+<p><img src="/flume/clip_image076.jpg" alt="img"></p>
+<p><img src="/flume/clip_image078.jpg" alt="img"></p>
+<p><img src="/flume/clip_image080.jpg" alt="img"></p>
 <p>9.拦截器</p>
 <p>（1）Host Interceptor</p>
 <p>1）配置文件</p>
@@ -422,20 +422,20 @@
 <p># 将source和sink绑定到channel上</p>
 <p>a1.sources.r1.channels &#x3D; c1</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps87.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image082.jpg" alt="img"></p>
 <p>2）启动</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf -f myconf&#x2F;example8-interceptor.conf -Dflume.root.logger&#x3D;INFO,console</p>
 <p>测试输入hello</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps88.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps89.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image084.jpg" alt="img"></p>
+<p><img src="/flume/clip_image086.jpg" alt="img"></p>
 <p>（2）Timestamp Interceptor</p>
 <p>1）在文件中加入以下语句</p>
 <p>a1.sources.r1.interceptors &#x3D; i1 i2</p>
 <p>a1.sources.r1.interceptors.i1.type &#x3D; host</p>
 <p>a1.sources.r1.interceptors.i2.type &#x3D; timestamp</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps90.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image088.jpg" alt="img"></p>
 <p>2）启动</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps91.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image090.jpg" alt="img"></p>
 <p>（3）Static Interceptor</p>
 <p>1）在文件中加入</p>
 <p>a1.sources.r1.interceptors &#x3D; i1 i2 i3</p>
@@ -444,29 +444,29 @@
 <p>a1.sources.r1.interceptors.i3.type &#x3D; static</p>
 <p>a1.sources.r1.interceptors.i3.key &#x3D; datacenter</p>
 <p>a1.sources.r1.interceptors.i3.value &#x3D; NEW_YORK</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps92.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image092.jpg" alt="img"></p>
 <p>2）启动测试</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps93.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps94.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image094.jpg" alt="img"></p>
+<p><img src="/flume/clip_image096.png" alt="img"></p>
 <p>（4）UUID Interceptor</p>
 <p>1）在文件中加入</p>
 <p>a1.sources.r1.interceptors.i4.type &#x3D; org.apache.flume.sink.solr.morphline.UUIDInterceptor$Builder</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps95.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image098.jpg" alt="img"></p>
 <p>2）启动测试</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps96.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps97.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image100.jpg" alt="img"></p>
+<p><img src="/flume/clip_image102.jpg" alt="img"></p>
 <p>（5）Search and Replace Interceptor</p>
 <p>1）在文件中加入</p>
 <p>a1.sources.r1.interceptors.i5.type &#x3D; search_replace</p>
 <p>a1.sources.r1.interceptors.i5.searchPattern &#x3D; \d{6}</p>
 <p>a1.sources.r1.interceptors.i5.replaceString &#x3D; ******1234</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps98.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image104.jpg" alt="img"></p>
 <p>2）启动测试</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps99.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps100.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image106.jpg" alt="img"></p>
+<p><img src="/flume/clip_image108.jpg" alt="img"></p>
 <p>（6）自定义拦截器</p>
 <p>1）把bigdata-flume-interc.jar包，放到flume的lib目录下</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps101.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image110.jpg" alt="img"></p>
 <p>2）修改上游服务器配置（node1和node2）</p>
 <p>在example9-1-taildir-f-avro-interceptor.conf中加入</p>
 <p>#上游服务器配置example9-1-taildir-f-avro-interceptor.conf</p>
@@ -499,7 +499,7 @@
 <p>#下游目标主机、端口</p>
 <p>a1.sinks.k1.hostname &#x3D; node3</p>
 <p>a1.sinks.k1.port &#x3D; 44444</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps102.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image112.jpg" alt="img"></p>
 <p>3）修改下游配置（node3）</p>
 <p>在example9-2-avro-f-hdfs-interceptor.conf中加入</p>
 <p>#下游服务器配置 example9-2-avro-f-hdfs-interceptor.conf</p>
@@ -534,22 +534,22 @@
 <p>a1.sinks.k1.hdfs.batchSize &#x3D; 1000</p>
 <p>a1.sinks.k1.hdfs.codeC &#x3D; gzip</p>
 <p>a1.sinks.k1.hdfs.fileType &#x3D; CompressedStream</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps103.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image114.jpg" alt="img"></p>
 <p>4）启动hdfs</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps104.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps105.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps106.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image116.jpg" alt="img"></p>
+<p><img src="/flume/clip_image118.jpg" alt="img"></p>
+<p><img src="/flume/clip_image120.jpg" alt="img"></p>
 <p>5）启动下游node3上的flume agent</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example9-2-avro-f-hdfs-interceptor.conf -Dflume.root.logger&#x3D;DEBUG,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps107.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image122.jpg" alt="img"></p>
 <p>6）在node1和node2上传两个日志目录来生成模拟日志数据</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps108.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image124.jpg" alt="img"></p>
 <p>7）启动node1和node2上的flume agent</p>
 <p>nohup bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example9-1-taildir-f-avro-interceptor.conf 1&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps109.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps110.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image126.jpg" alt="img"></p>
+<p><img src="/flume/clip_image128.jpg" alt="img"></p>
 <p>8）去hdfs上查看是否采集到数据</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps111.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image130.jpg" alt="img"></p>
 <p>10.Channel选择器</p>
 <p>（1）Replicating Channel Selector</p>
 <p>1）配置文件</p>
@@ -592,9 +592,9 @@
 <p>a1.sinks.k2.hdfs.batchSize &#x3D; 1000</p>
 <p>a1.sinks.k2.hdfs.fileType &#x3D; DataStream</p>
 <p>a1.sinks.k2.hdfs.useLocalTimeStamp &#x3D; true</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps112.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image132.jpg" alt="img"></p>
 <p>2）启动测试</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps113.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image134.jpg" alt="img"></p>
 <p>（2）Multiplexing Channel Selector</p>
 <p>1）在example11-channel-Multiplexing.conf文件中加入</p>
 <p>#example11-channel-Multiplexing.conf</p>
@@ -642,10 +642,10 @@
 <p>a1.sinks.k2.hdfs.batchSize &#x3D; 1000</p>
 <p>a1.sinks.k2.hdfs.fileType &#x3D; DataStream</p>
 <p>a1.sinks.k2.hdfs.useLocalTimeStamp &#x3D; true</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps114.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image136.jpg" alt="img"></p>
 <p>2）启动测试</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps115.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps116.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image138.jpg" alt="img"></p>
+<p><img src="/flume/clip_image140.jpg" alt="img"></p>
 <p>\11. Sink处理器</p>
 <p>（1）Failover Sink Processor</p>
 <p>1）在上游配置文件（node1）</p>
@@ -677,7 +677,7 @@
 <p>a1.sinkgroups.g1.processor.priority.k1 &#x3D; 200</p>
 <p>a1.sinkgroups.g1.processor.priority.k2 &#x3D; 100</p>
 <p>a1.sinkgroups.g1.processor.maxpenalty &#x3D; 5000</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps117.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image142.jpg" alt="img"></p>
 <p>2）在下游配置文件（node2和node3）</p>
 <p>在example12-2-sink-failover.conf文件中输入</p>
 <p>#example12-2-sink-failover.conf</p>
@@ -695,13 +695,13 @@
 <p>a1.channels.c1.transactionCapacity &#x3D; 1000</p>
 <p>a1.sinks.k1.type &#x3D; logger</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps118.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image144.jpg" alt="img"></p>
 <p>3）保证hdfs正常启动</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps119.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image146.jpg" alt="img"></p>
 <p>4）启动下游node2和node3</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example12-2-sink-failover.conf -Dflume.root.logger&#x3D;DEBUG,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps120.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps121.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image148.jpg" alt="img"></p>
+<p><img src="/flume/clip_image150.jpg" alt="img"></p>
 <p>5）上游node1启动</p>
 <p>（2）Load balancing Sink Processor</p>
 <p> 1）在上游进行flume配置（node1）</p>
@@ -732,7 +732,7 @@
 <p>a1.sinkgroups.g1.processor.type &#x3D; load_balance</p>
 <p>a1.sinkgroups.g1.processor.backoff &#x3D; true </p>
 <p>a1.sinkgroups.g1.processor.selector &#x3D; round_robin</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps122.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image152.jpg" alt="img"></p>
 <p>2）在下游flume配置（node2和node3）</p>
 <p>在example13-2-sink-loadbalance.conf中加入</p>
 <p>#example13-2-sink-loadbalance.conf</p>
@@ -750,13 +750,13 @@
 <p>a1.channels.c1.transactionCapacity &#x3D; 1000</p>
 <p>a1.sinks.k1.type &#x3D; logger</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps123.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image154.jpg" alt="img"></p>
 <p>3）启动下游（node2和node3）</p>
 <p>bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example13-2-sink-loadbalance.conf -Dflume.root.logger&#x3D;DEBUG,console</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps124.jpg" alt="img"> </p>
+<p><img src="/flume/clip_image156.jpg" alt="img"></p>
 <p>4）启动上游（node1）</p>
 <p>nohup bin&#x2F;flume-ng agent -n a1 -c conf&#x2F; -f myconf&#x2F;example13-1-sink-loadbalance.conf 1&gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps125.jpg" alt="img"></p>
+<p><img src="/flume/clip_image158.jpg" alt="img"></p>
 
 	</div>
 </article>

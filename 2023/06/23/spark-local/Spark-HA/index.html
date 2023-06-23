@@ -81,7 +81,7 @@
   <div class="page-meta">
   	<span class="fa-wrap">
   		<i class="fa fa-clock-o"></i>
-  		<span class="date-meta">2023-06-13</span>
+  		<span class="date-meta">2023-06-23</span>
   	</span>
   	<span class="fa-wrap">
   		
@@ -91,16 +91,20 @@
   	</span>
   </div>
   <div class="post-content">
-  <h1 id="spark-stand-alone-HA环境搭建"><a href="#spark-stand-alone-HA环境搭建" class="headerlink" title="spark stand alone HA环境搭建"></a>spark stand alone HA环境搭建</h1><p>Spark Standalone HA用于提高 Spark 集群的可用性和容错能力。此部署方式使用多个 Spark master节点来实现故障切换和负载均衡，从而确保即使某个节点发生故障或者停机，Spark 集群仍然可以继续工作。</p>
+  <h1 id="spark-stand-alone-HA环境搭建"><a href="#spark-stand-alone-HA环境搭建" class="headerlink" title="spark stand alone HA环境搭建"></a>spark stand alone HA环境搭建</h1><p>Spark Standalone HA用于提高 Spark 集群的可用性和容错能力。此部署方式使用多个 Spark master节点来实现故障切换和负载均衡，从而确保即使某个节点发生故障或者停机，<br>Spark 集群仍然可以继续工作。</p>
 <span id="more"></span>
 
-<h2 id="修改spark-env-sh文件"><a href="#修改spark-env-sh文件" class="headerlink" title="修改spark-env.sh文件"></a>修改spark-env.sh文件</h2><p>spark.deploy.recoveryMode 指定HA模式 基于Zookeeper实现，指定Zookeeper的连接地址和Zookeeper中注册临时节点的路径<br>删除文件中的SPARK_MASTER_HOST&#x3D;node1<br><img src="/spark-HA/clip_image002.jpg" alt="img"></p>
-<p>增加<br>SPARK_DAEMON_JAVA_OPTS&#x3D;”-Dspark.deploy.recoveryMode&#x3D;ZOOKEEPER -Dspark.deploy.zookeeper.url&#x3D;node1:2181,node2:2181,node3:2181 -Dspark.deploy.zookeeper.dir&#x3D;&#x2F;spark-ha”</p>
-<h2 id="把node1上配置好的spark-env-sh发送到node2和node3上"><a href="#把node1上配置好的spark-env-sh发送到node2和node3上" class="headerlink" title="把node1上配置好的spark-env.sh发送到node2和node3上"></a>把node1上配置好的spark-env.sh发送到node2和node3上</h2><p>scp spark-env.sh node2:&#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;<br>scp spark-env.sh node3:&#x2F;export&#x2F;server&#x2F;spark&#x2F;conf&#x2F;<br><img src="/spark-HA/clip_image004.jpg" alt="img"></p>
-<h2 id="首先要保证三台虚拟机上当前的standalone集群是停止的"><a href="#首先要保证三台虚拟机上当前的standalone集群是停止的" class="headerlink" title="首先要保证三台虚拟机上当前的standalone集群是停止的"></a>首先要保证三台虚拟机上当前的standalone集群是停止的</h2><p>sbin&#x2F;stop-all.sh<br><img src="/spark-HA/clip_image006.jpg" alt="img"></p>
-<h2 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h2><p>在node1上 启动一个master 和全部worker<br>sbin&#x2F;start-all.sh<br><img src="/spark-HA/clip_image008.jpg" alt="img"><br>node2上进程<br><img src="/spark-HA/clip_image010.jpg" alt="img"><br>node3上进程<br><img src="/spark-HA/clip_image012.jpg" alt="img"><br>web网页上查看<br><img src="/spark-HA/clip_image014.jpg" alt="img"></p>
-<p>在node2上启动一个备用的master进程<br>sbin&#x2F;start-master.sh<br><img src="/spark-HA/clip_image016.jpg" alt="img"><br>到web端查看<br><img src="/spark-HA/clip_image018.jpg" alt="img"></p>
-<h2 id="master注备切换"><a href="#master注备切换" class="headerlink" title="master注备切换"></a>master注备切换</h2><p>提交spark任务到alivemaster上<br>bin&#x2F;spark-submit –master spark:&#x2F;&#x2F;node1:7077 &#x2F;export&#x2F;server&#x2F;spark&#x2F;examples&#x2F;src&#x2F;main&#x2F;python&#x2F;pi.py 1000<br><img src="/spark-HA/clip_image022.jpg" alt="img"><br>提交完成后kill掉node1的master<br><img src="/spark-HA/clip_image020.jpg" alt="img"></p>
+<h2 id="修改spark-env-sh文件"><a href="#修改spark-env-sh文件" class="headerlink" title="修改spark-env.sh文件"></a>修改spark-env.sh文件</h2><p>spark.deploy.recoveryMode 指定HA模式<br>基于Zookeeper实现，<br>指定Zookeeper的连接地址<br>和Zookeeper中注册临时节点的路径<br>删除文件中的SPARK_MASTER_HOST&#x3D;node1</p>
+<h1 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SPARK_DAEMON_JAVA_OPTS=&quot;-Dspark.deploy.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.url=node1:2181,node2:2181,node3:2181 -Dspark.deploy.zookeeper.dir=/spark-ha&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="把node1上配置好的spark-env-sh发送到node2和node3上"><a href="#把node1上配置好的spark-env-sh发送到node2和node3上" class="headerlink" title="把node1上配置好的spark-env.sh发送到node2和node3上"></a>把node1上配置好的spark-env.sh发送到node2和node3上</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp spark-env.sh node2:/export/server/spark/conf/</span><br><span class="line">scp spark-env.sh node3:/export/server/spark/conf/</span><br></pre></td></tr></table></figure>
+
+<h2 id="首先要保证三台虚拟机上当前的standalone集群是停止的"><a href="#首先要保证三台虚拟机上当前的standalone集群是停止的" class="headerlink" title="首先要保证三台虚拟机上当前的standalone集群是停止的"></a>首先要保证三台虚拟机上当前的standalone集群是停止的</h2><p>sbin&#x2F;stop-all.sh</p>
+<h2 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h2><p>在node1上 启动一个master 和全部worker<br>sbin&#x2F;start-all.sh</p>
+<p>在node2上启动一个备用的master进程<br>sbin&#x2F;start-master.sh</p>
+<h2 id="master注备切换"><a href="#master注备切换" class="headerlink" title="master注备切换"></a>master注备切换</h2><p>提交spark任务到alivemaster上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bin/spark-submit --master spark://node1:7077 /export/server/spark/examples/src/main/python/pi.py 1000</span><br></pre></td></tr></table></figure>
+
+<p>提交完成后kill掉node1的master</p>
 
 	</div>
 </article>

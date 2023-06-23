@@ -81,7 +81,7 @@
   <div class="page-meta">
   	<span class="fa-wrap">
   		<i class="fa fa-clock-o"></i>
-  		<span class="date-meta">2023-06-20</span>
+  		<span class="date-meta">2023-06-23</span>
   	</span>
   	<span class="fa-wrap">
   		
@@ -91,116 +91,116 @@
   	</span>
   </div>
   <div class="post-content">
-  <h1 id="Kafka"><a href="#Kafka" class="headerlink" title="Kafka"></a>Kafka</h1><p>（一）安装kafka集群</p>
+  <p>（一）安装kafka集群</p>
 <p>1.需要的环境有：java和zookeeper</p>
 <p>2.移动包到&#x2F;export&#x2F;server</p>
-<p><img src="/kafka%5Cwps1.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image002.jpg" alt="img"></p>
 <p>3.解压并设置软连接</p>
 <p>tar zxvf kafka_2.11-2.0.0.tgz</p>
-<p><img src="file:///D:\blog\source_posts\kafka\wps2.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps3.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image004.jpg" alt="img"></p>
+<p><img src="/kafka/clip_image006.jpg" alt="img"></p>
 <p>4.修改配置文件</p>
 <p>（1）vim &#x2F;etc&#x2F;profile</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps4.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image008.jpg" alt="img"></p>
 <p>（2）cd &#x2F;export&#x2F;server&#x2F;kafka&#x2F;config</p>
 <p>vi server.properties</p>
 <p>#为依次增长的:0、1、2、3、4,集群中唯一 id –》从0开始，每台不能重复，第一块要改的</p>
 <p>broker.id&#x3D;0 </p>
 <p>—-Logbasic——</p>
 <p>#数据存储的目录，第二块要改的</p>
-<p>log.dirs&#x3D;&#x2F;export&#x2F;data&#x2F;kafka-logs  </p>
+<p>log.dirs&#x3D;&#x2F;export&#x2F;data&#x2F;kafka-logs </p>
 <p>—zookeeper—-</p>
 <p>#指定 zk 集群地址，第四块要改的</p>
 <p>zookeeper.connect&#x3D;node1:2181,node2:2181,node3:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps5.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image010.jpg" alt="img"></p>
 <p>\5. 分发kafka</p>
 <p>scp -r kafka root@node2:&#x2F;export&#x2F;server&#x2F;</p>
 <p>scp -r kafka root@node3:&#x2F;export&#x2F;server&#x2F;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps6.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image012.jpg" alt="img"></p>
 <p>\6. 分别在node2和node3上修改配置文件</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps7.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image014.jpg" alt="img"></p>
 <p>node2上的broker.id改成1，node3上的broker.id改成2</p>
 <p>7.启动kafka集群</p>
 <p>kafka-server-start.sh -daemon &#x2F;export&#x2F;server&#x2F;kafka&#x2F;config&#x2F;server.properties（三个节点都启动）</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps8.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image016.jpg" alt="img"></p>
 <p>8.一键启停脚本</p>
 <p>#!&#x2F;bin&#x2F;bash</p>
 <p>if [ $# -eq 0 ]</p>
 <p>then</p>
-<p>​	echo “please input param:start stop”</p>
+<p>​    echo “please input param:start stop”</p>
 <p>else</p>
-<p>​	if [ $1 &#x3D; start  ]</p>
-<p>​		then</p>
-<p>​			for i in {1..3}</p>
-<p>​			do</p>
-<p>​				echo “${1}ing node${i}”</p>
-<p>​				ssh node${i} “source &#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;kafka&#x2F;bin&#x2F;kafka-server-start.sh -daemon &#x2F;export&#x2F;server&#x2F;kafka&#x2F;config&#x2F;server.properties”</p>
-<p>​			done</p>
-<p>​	fi</p>
-<p>​	if [ $1 &#x3D; stop ]</p>
-<p>​		then</p>
-<p>​			for i in {1..3}</p>
-<p>​			do</p>
-<p>​				echo “${1}ing node${i}”</p>
-<p>​				ssh node${i} “source 		&#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;kafka&#x2F;bin&#x2F;kafka-server-stop.sh”</p>
-<p>​			done</p>
-<p>​	fi</p>
-<p>​	if [ $1 &#x3D; status ]</p>
-<p>​		then</p>
-<p>​			for i in {1..3}</p>
-<p>​			do</p>
-<p>​				echo “node${i} status:”</p>
-<p>​				ssh node${i} “source &#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;kafka&#x2F;bin&#x2F;kafka-server-status.sh”</p>
-<p>​			done</p>
-<p>​	fi</p>
+<p>​    if [ $1 &#x3D; start ]</p>
+<p>​       then</p>
+<p>​           for i in {1..3}</p>
+<p>​           do</p>
+<p>​              echo “${1}ing node${i}”</p>
+<p>​              ssh node${i} “source &#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;kafka&#x2F;bin&#x2F;kafka-server-start.sh -daemon &#x2F;export&#x2F;server&#x2F;kafka&#x2F;config&#x2F;server.properties”</p>
+<p>​           done</p>
+<p>​    fi</p>
+<p>​    if [ $1 &#x3D; stop ]</p>
+<p>​       then</p>
+<p>​           for i in {1..3}</p>
+<p>​           do</p>
+<p>​               echo “${1}ing node${i}”</p>
+<p>​              ssh node${i} “source       &#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;kafka&#x2F;bin&#x2F;kafka-server-stop.sh”</p>
+<p>​           done</p>
+<p>​    fi</p>
+<p>​    if [ $1 &#x3D; status ]</p>
+<p>​       then</p>
+<p>​           for i in {1..3}</p>
+<p>​           do</p>
+<p>​              echo “node${i} status:”</p>
+<p>​              ssh node${i} “source &#x2F;etc&#x2F;profile;&#x2F;export&#x2F;server&#x2F;kafka&#x2F;bin&#x2F;kafka-server-status.sh”</p>
+<p>​           done</p>
+<p>​    fi</p>
 <p>fi</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps9.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image018.jpg" alt="img"></p>
 <p>（二）kafka操作</p>
 <p>1.创建topic</p>
 <p>（1）基本方式</p>
 <p>.&#x2F;kafka-topics.sh –create –topic tpc_1 –partitions 2 –replication-factor 2 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps10.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image020.jpg" alt="img"></p>
 <p>（2）手动指定副本的存储位置</p>
 <p>bin&#x2F;kafka-topics.sh –create –topic tpc_2 –zookeeper node1:2181 –replica-assignment 0:1,1:2</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps11.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image022.jpg" alt="img"></p>
 <p>（3） 创建名为test的主题</p>
 <p>.&#x2F;kafka-topics.sh –zookeeper localhost:2181 –create –topic test –replication-factor 1 –partitions 5</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps12.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image024.jpg" alt="img"></p>
 <p>2）查看主题</p>
 <p>.&#x2F;kafka-topics.sh –zookeeper node1:2181 –list</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps13.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image026.jpg" alt="img"></p>
 <p>2.删除topic</p>
-<p>bin&#x2F;kafka-topics.sh  –delete –topic tpc_1 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps14.jpg" alt="img"> </p>
+<p>bin&#x2F;kafka-topics.sh –delete –topic tpc_1 –zookeeper node1:2181</p>
+<p><img src="/kafka/clip_image028.jpg" alt="img"></p>
 <p>\3. 查看topic</p>
 <p>（1）列出当前系统中的所有 topic</p>
 <p>bin&#x2F;kafka-topics.sh –zookeeper node1:2181,node2:2181,node3:2181 –list</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps15.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image030.jpg" alt="img"></p>
 <p>（2）查看 topic 详细信息</p>
 <p>bin&#x2F;kafka-topics.sh –describe –topic tpc_1 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps16.jpg" alt="img"> <img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps17.jpg" alt="img"></p>
+<p><img src="/kafka/clip_image032.jpg" alt="img"> <img src="/kafka/clip_image033.jpg" alt="img"></p>
 <p>\4. 增加分区数</p>
 <p>bin&#x2F;kafka-topics.sh –alter –topic tpc_1 –partitions 3 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps18.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image035.jpg" alt="img"></p>
 <p>\5. 动态配置topic 参数</p>
 <p>（1）添加</p>
 <p>bin&#x2F;kafka-configs.sh –zookeeper node1:2181 –entity-type topics –entity-name tpc_1 –alter –add-config compression.type&#x3D;gzip</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps19.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image037.jpg" alt="img"></p>
 <p>（2）删除配置参数</p>
 <p>bin&#x2F;kafka-configs.sh –zookeeper node1:2181 –entity-type topics –entity-name tpc_1 –alter –delete-config compression.type</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps20.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image039.jpg" alt="img"></p>
 <p>\6. 生产消息到Kafka并进行消费</p>
 <p>bin&#x2F;kafka-console-producer.sh –broker-list node1:9092, node2:9092, node3:9092 –topic tpc_1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps21.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image041.jpg" alt="img"></p>
 <p>消费消息</p>
 <p>bin&#x2F;kafka-console-consumer.sh –bootstrap-server node1:9092, node2:9092, node1:9092 –topic tpc_1 –from-beginning</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps22.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image043.jpg" alt="img"></p>
 <p>\7. 配置管理kafka-configs</p>
 <p>添加topic级别参数</p>
 <p>bin&#x2F;kafka-configs.sh –zookeeper node1:2181 –alter –entity-type topics –entity-name tpc_2 –add-config cleanup.policy&#x3D;compact , max.message.bytes&#x3D;10000</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps23.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image045.jpg" alt="img"></p>
 <p>8.kafka的生产者、消费者工具</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps24.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image047.jpg" alt="img"></p>
 <p>（三）Kafka Java API开发</p>
 <p>1.producer生产者</p>
 <p>（1）引入 maven 依赖</p>
@@ -259,9 +259,9 @@
 
 <p>​    <repository></p>
 <p>​      <id>nexus-aliyun</id></p>
-<p>​      <name>Nexus aliyun</name></p>
+<p>​       <name>Nexus aliyun</name></p>
 <p>​      <layout>default</layout></p>
-<p>​      <url><a target="_blank" rel="noopener" href="http://maven.aliyun.com/nexus/content/groups/public">http://maven.aliyun.com/nexus/content/groups/public</a></url></p>
+<p>​       <url><a target="_blank" rel="noopener" href="http://maven.aliyun.com/nexus/content/groups/public">http://maven.aliyun.com/nexus/content/groups/public</a></url></p>
 <p>​      <snapshots></p>
 <p>​        <enabled>false</enabled></p>
 <p>​        <updatePolicy>never</updatePolicy></p>
@@ -322,7 +322,7 @@
 <p>​          </execution></p>
 <p>​        </executions></p>
 <p>​      </plugin></p>
-<p>​      <!--  把依赖jar中的用到的类，提取到自己的jar中 --></p>
+<p>​      <!-- 把依赖jar中的用到的类，提取到自己的jar中 --></p>
 <p>​      <plugin></p>
 <p>​        <groupId>org.apache.maven.plugins</groupId></p>
 <p>​        <artifactId>maven-assembly-plugin</artifactId></p>
@@ -353,16 +353,16 @@
 
 </project>
 
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps25.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image049.jpg" alt="img"></p>
 <p>（2）运行代码</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps26.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image051.jpg" alt="img"></p>
 <p>2.consumer生产者</p>
 <p>（1）运行以下代码</p>
 <p>package ccjz;</p>
 <p>&#x2F;**</p>
 <p> * @BelongsProject: kafka-group</p>
 <p> * @BelongsPackage: ccjz</p>
-<p> * @CreateTime: 2023-05-28  14:47</p>
+<p> * @CreateTime: 2023-05-28 14:47</p>
 <p> * @Description: TODO</p>
 <p> * @Version: 1.0</p>
 <p> *&#x2F;</p>
@@ -378,7 +378,7 @@
 <p>  public static void main(String[] args) {</p>
 <p>​    Properties props &#x3D; new Properties();</p>
 <p>​    props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());</p>
-<p>props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class.getName());     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,”node1:9092,node2:9092,node3:9092”);</p>
+<p>props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class.getName());    props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,”node1:9092,node2:9092,node3:9092”);</p>
 <p>​    props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,”earliest”);</p>
 <p>​    props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,true);</p>
 <p>​    props.put(ConsumerConfig.GROUP_ID_CONFIG,”g1”);</p>
@@ -394,7 +394,7 @@
 <p>​    for (TopicPartition topicPartition : assignment) {</p>
 <p>​      kafkaConsumer.seek(topicPartition,100);</p>
 <p>​    }</p>
-<p>​    while (true){</p>
+<p>​     while (true){</p>
 <p>​      ConsumerRecords&lt;String, String&gt; records &#x3D; kafkaConsumer.poll(Duration.ofMillis(Long.MAX_VALUE));</p>
 <p>​      for (ConsumerRecord&lt;String, String&gt; record : records) {</p>
 <p>​        &#x2F;&#x2F; 做一些业务处理</p>
@@ -409,7 +409,7 @@
 <p>  }</p>
 <p>}</p>
 <p>（2）运行结果</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps27.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image053.jpg" alt="img"></p>
 <p>（四）kafka整合</p>
 <p>1.kafka+flume</p>
 <p>（1）配置flume</p>
@@ -435,19 +435,19 @@
 <p># bind</p>
 <p>a1.sources.r1.channels &#x3D; c1</p>
 <p>a1.sinks.k1.channel &#x3D; c1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps28.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image055.jpg" alt="img"></p>
 <p>（2）启动客户端消费者</p>
 <p>（3）启动flume</p>
 <p>bin&#x2F;flume-ng agent -c conf&#x2F; -n a1 -f myconf&#x2F;kexample1-flume-jia-kafka.conf</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps29.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image057.jpg" alt="img"></p>
 <p>（4）向日志中增加数据查看消费情况</p>
 <p>1）向flume.log中增加hello world数据</p>
 <p>echo hello &gt;&gt; &#x2F;root&#x2F;flume.log</p>
 <p>echo world &gt;&gt; &#x2F;root&#x2F;flume.log</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps30.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image059.jpg" alt="img"></p>
 <p>2）查看消费的情况</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps31.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps32.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image061.jpg" alt="img"></p>
+<p><img src="/kafka/clip_image063.jpg" alt="img"></p>
 <p>2.kafka+sparkStreaming</p>
 <p>&#x2F;&#x2F;以workCount 示意：</p>
 <p>import org.apache.kafka.clients.consumer.ConsumerRecord</p>
@@ -458,33 +458,33 @@
 <p>import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}</p>
 <p>import org.apache.spark.streaming.{Seconds, StreamingContext}</p>
 <p>object WordCount {</p>
-<p>​	def main(args: Array[String]): Unit &#x3D; {</p>
-<p>​		val sparkConf &#x3D; new SparkConf().setAppName(“spark streaming 整合kafka”).setMaster(“local[*]”)</p>
+<p>​    def main(args: Array[String]): Unit &#x3D; {</p>
+<p>​       val sparkConf &#x3D; new SparkConf().setAppName(“spark streaming 整合kafka”).setMaster(“local[*]”)</p>
 <p>​    </p>
-<p>​		val ssc &#x3D; new StreamingContext(sparkConf, Seconds(1))</p>
-<p>​		val kafkaParams &#x3D; Map[String, Object](</p>
-<p>​			“bootstrap.servers” -&gt; “node1:9092,node2:9092,node3:9092”,</p>
-<p>​			“key.deserializer” -&gt; classOf[StringDeserializer],</p>
-<p>​			“value.deserializer” -&gt; classOf[StringDeserializer],</p>
-<p>​			“group.id” -&gt; “use_a_separate_group_id_for_each_stream”,</p>
-<p>​			“auto.offset.reset” -&gt; “earliest”,</p>
-<p>​			“enable.auto.commit” -&gt; (false: java.lang.Boolean)</p>
-<p>​			)</p>
-<p>​		val topics &#x3D; Array(“test”)</p>
-<p>​		&#x2F;&#x2F; 获取数据</p>
-<p>​		val stream: InputDStream[ConsumerRecord[String, String]] &#x3D; 		KafkaUtils.createDirectStream[String, String](</p>
+<p>​       val ssc &#x3D; new StreamingContext(sparkConf, Seconds(1))</p>
+<p>​       val kafkaParams &#x3D; Map[String, Object](</p>
+<p>​           “bootstrap.servers” -&gt; “node1:9092,node2:9092,node3:9092”,</p>
+<p>​           “key.deserializer” -&gt; classOf[StringDeserializer],</p>
+<p>​           “value.deserializer” -&gt; classOf[StringDeserializer],</p>
+<p>​           “group.id” -&gt; “use_a_separate_group_id_for_each_stream”,</p>
+<p>​           “auto.offset.reset” -&gt; “earliest”,</p>
+<p>​           “enable.auto.commit” -&gt; (false: java.lang.Boolean)</p>
+<p>​           )</p>
+<p>​       val topics &#x3D; Array(“test”)</p>
+<p>​       &#x2F;&#x2F; 获取数据</p>
+<p>​       val stream: InputDStream[ConsumerRecord[String, String]] &#x3D;      KafkaUtils.createDirectStream[String, String](</p>
 <p>ssc,</p>
 <p>LocationStrategies.PreferConsistent, &#x2F;&#x2F; 如果计算节点和Broker 是同一台节点可以使用PreferBrokers</p>
 <p>ConsumerStrategies.Subscribe[String, String](topics, kafkaParams)</p>
 <p>)</p>
-<p>​		stream.foreachRDD(rdd &#x3D;&gt; {</p>
+<p>​       stream.foreachRDD(rdd &#x3D;&gt; {</p>
 <p>​      val words: RDD[Array[String]] &#x3D; rdd.map(_.value()).map(line &#x3D;&gt; line.split(“ “))</p>
-<p>​			val wordAndOne: RDD[(String, Int)] &#x3D; words.flatMap(arr &#x3D;&gt; arr.map(word &#x3D;&gt; (word, 1)))</p>
-<p>​		&#x2F;&#x2F; RDD[(K, V)]</p>
-<p>​			val wordCountResult &#x3D; wordAndOne.reduceByKey(_ + _)</p>
+<p>​           val wordAndOne: RDD[(String, Int)] &#x3D; words.flatMap(arr &#x3D;&gt; arr.map(word &#x3D;&gt; (word, 1)))</p>
+<p>​       &#x2F;&#x2F; RDD[(K, V)]</p>
+<p>​           val wordCountResult &#x3D; wordAndOne.reduceByKey(_ + _)</p>
 <p>wordCountResult.foreach(println)</p>
 <p>​    })</p>
-<p>​	ssc.start()</p>
+<p>​    ssc.start()</p>
 <p>  ssc.awaitTermination()</p>
 <p>  }</p>
 <p>}</p>
@@ -492,31 +492,31 @@
 <p>1.生产者性能测试</p>
 <p>（1）tpc_13: 分区数 2,副本数 1</p>
 <p>kafka-topics.sh –create –topic tpc_13 –partitions 2 –replication-factor 1 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps33.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image065.jpg" alt="img"></p>
 <p>kafka-producer-perf-test.sh –topic tpc_13 –num-records 100 –record-size 1024 –throughput -1 –producer-props bootstrap.servers&#x3D;node1:9092 acks&#x3D;1 </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps34.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image067.jpg" alt="img"></p>
 <p>（2）tpc_14: 分区数 2,副本数 2</p>
 <p>kafka-topics.sh –create –topic tpc_14 –partitions 2 –replication-factor 2 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps35.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image069.jpg" alt="img"></p>
 <p>kafka-producer-perf-test.sh –topic tpc_14 –num-records 100 –record-size 1024 –throughput -1 –producer-props bootstrap.servers&#x3D;node1:9092 acks&#x3D;1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps36.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image071.jpg" alt="img"></p>
 <p>（3）tpc_15:分区数 3,副本数 1</p>
 <p>kafka-topics.sh –create –topic tpc_15 –partitions 3 –replication-factor 1 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps37.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image073.jpg" alt="img"></p>
 <p>kafka-producer-perf-test.sh –topic tpc_15 –num-records 100 –record-size 1024 –throughput -1 –producer-props bootstrap.servers&#x3D;node1:9092 acks&#x3D;1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps38.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image075.jpg" alt="img"></p>
 <p>（4）tpc_16:分区数 6,副本数 1</p>
 <p>kafka-topics.sh –create –topic tpc_16 –partitions 6 –replication-factor 1 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps39.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image077.jpg" alt="img"></p>
 <p>kafka-producer-perf-test.sh –topic tpc_16 –num-records 100 –record-size 1024 –throughput -1 –producer-props bootstrap.servers&#x3D;node1:9092 acks&#x3D;1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps40.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image079.jpg" alt="img"></p>
 <p>（5）tpc_22:分区数12</p>
 <p>kafka-topics.sh –create –topic tpc_22 –partitions 12 –replication-factor 1 –zookeeper node1:2181</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps41.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image081.jpg" alt="img"></p>
 <p>kafka-producer-perf-test.sh –topic tpc_22 –num-records 100 –record-size 1024 –throughput -1 –producer-props bootstrap.servers&#x3D;node1:9092 acks&#x3D;1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps42.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image083.jpg" alt="img"></p>
 <p>2.按照上方的结果进行可视化分析</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps43.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image085.jpg" alt="img"></p>
 <p>由上图可以了解到，数据随着分区和副本数的不同产生不同的结果，其中分区数越多，发送速度越快。</p>
 <p>3.但是后经过更多分区的测试，可视化线发送速度趋于平稳。</p>
 <p>（六）RDD</p>
@@ -530,7 +530,7 @@
 <p>  rdd &#x3D; sc.parallelize([1, 2, 3], 3)</p>
 <p>  print(“分区数: “, rdd.getNumPartitions())</p>
 <p>print(“rdd的内容是: “, rdd.collect())</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps44.jpg" alt="img"> </p>
+<p><img src="/kafka/clip_image087.jpg" alt="img"></p>
 <p>2.数据分区处理并读取</p>
 <p>from pyspark import SparkConf, SparkContext</p>
 <p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:</p>
@@ -542,12 +542,12 @@
 <p>  file_rdd2 &#x3D; sc.textFile(“..&#x2F;data&#x2F;input&#x2F;words.txt”, 3)</p>
 <p>  file_rdd3 &#x3D; sc.textFile(“..&#x2F;data&#x2F;input&#x2F;words.txt”, 100)</p>
 <p>  print(“file_rdd2 分区数:”, file_rdd2.getNumPartitions())</p>
-<p>  print(“file_rdd3 分区数:”, file_rdd3.getNumPartitions())</p>
+<p>   print(“file_rdd3 分区数:”, file_rdd3.getNumPartitions())</p>
 <p>  hdfs_rdd &#x3D; sc.textFile(“hdfs:&#x2F;&#x2F;node1:8020&#x2F;input&#x2F;words.txt”)</p>
 <p>  print(“hdfs_rdd 内容:”, hdfs_rdd.collect())</p>
 <p>创建本地文件words.txt，上传文件words.txt到hdfs上</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps45.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps46.jpg" alt="img"></p>
+<p><img src="/kafka/clip_image089.jpg" alt="img"></p>
+<p><img src="/kafka/clip_image091.jpg" alt="img"></p>
 
 	</div>
 </article>

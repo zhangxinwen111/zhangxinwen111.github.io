@@ -81,7 +81,7 @@
   <div class="page-meta">
   	<span class="fa-wrap">
   		<i class="fa fa-clock-o"></i>
-  		<span class="date-meta">2023-06-20</span>
+  		<span class="date-meta">2023-06-23</span>
   	</span>
   	<span class="fa-wrap">
   		
@@ -91,7 +91,7 @@
   	</span>
   </div>
   <div class="post-content">
-  <h1 id="Sqoop"><a href="#Sqoop" class="headerlink" title="Sqoop"></a>Sqoop</h1><p>Sqoop可以将关系型数据库（RDBMS）的数据导入（import）hadoop生态系统中，例如将RDBMS中的表导入到HDFS中或将数据加载到hive表中；将hadoop生态系统中的数据导出（export）到关系型数据库中，以此可以使用传统的sql查询工具进行数据分析。Sqoop支持多重数据库，mysql、oracle、postgresoql等。</p>
+  <p>Sqoop可以将关系型数据库（RDBMS）的数据导入（import）hadoop生态系统中，例如将RDBMS中的表导入到HDFS中或将数据加载到hive表中；将hadoop生态系统中的数据导出（export）到关系型数据库中，以此可以使用传统的sql查询工具进行数据分析。Sqoop支持多重数据库，mysql、oracle、postgresoql等。</p>
 <p>此处以node2为例</p>
 <p>1.sqoop安装</p>
 <p>（1）基础环境</p>
@@ -99,40 +99,40 @@
 <p>（2）解压并设置软连接</p>
 <p>1）解压sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz安装包</p>
 <p>tar zxvf sqoop-1.4.6.bin__hadoop-2.0.4-alpha.tar.gz</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps148.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image002.jpg" alt="img"></p>
 <p>2）设置软连接</p>
 <p>ln -s sqoop-1.4.6.bin__hadoop-2.0.4-alpha&#x2F; sqoop</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps149.png" alt="img"> </p>
+<p><img src="/sqoop/clip_image004.jpg" alt="img"></p>
 <p>（3）修改配置文件</p>
 <p>1）vim &#x2F;etc&#x2F;profile</p>
 <p>加入</p>
 <p>#SQOOP_HOME</p>
 <p>export SQOOP_HOME&#x3D;&#x2F;export&#x2F;server&#x2F;sqoop</p>
 <p>export PATH&#x3D;$PATH:$SQOOP_HOME&#x2F;bin</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps150.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image006.jpg" alt="img"></p>
 <p>2）进入sqoop的conf配置文件夹</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps151.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image008.jpg" alt="img"></p>
 <p>mv sqoop-env-template.sh sqoop-env.sh</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps152.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image010.jpg" alt="img"></p>
 <p>vi sqoop-env.sh</p>
 <p>加入</p>
 <p>export HADOOP_COMMON_HOME&#x3D; &#x2F;export&#x2F;server&#x2F;hadoop</p>
 <p>export HADOOP_MAPRED_HOME&#x3D; &#x2F;export&#x2F;server&#x2F;hadoop</p>
 <p>export HIVE_HOME&#x3D; &#x2F;export&#x2F;server&#x2F;hive</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps153.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image012.jpg" alt="img"></p>
 <p>（4）加入mysql的jdbc驱动包</p>
 <p>cp &#x2F;export&#x2F;server&#x2F;hive&#x2F;lib&#x2F;mysql-connector-java-5.1.32.jar &#x2F;export&#x2F;server&#x2F;sqoop&#x2F;lib&#x2F;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps154.png" alt="img"> </p>
+<p><img src="/sqoop/clip_image014.jpg" alt="img"></p>
 <p>（5）验证启动</p>
 <p>bin&#x2F;sqoop list-databases \</p>
 <p> –connect jdbc:mysql:&#x2F;&#x2F;node1:3306&#x2F; \</p>
 <p> –username root –password hadoop</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps155.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image016.jpg" alt="img"></p>
 <p>2.Sqoop导入</p>
 <p>（1）全量导入</p>
 <p>mysql表数据到hdfs</p>
 <p>1） 在mysql中创建数据库userdb</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps156.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image018.jpg" alt="img"></p>
 <p>2）运行以下sql语句得到三张表</p>
 <p>use userdb;</p>
 <p>SET FOREIGN_KEY_CHECKS&#x3D;0;</p>
@@ -167,13 +167,13 @@
 <p> <code>phno</code> varchar(100) DEFAULT NULL,</p>
 <p> <code>email</code> varchar(100) DEFAULT NULL</p>
 <p>) ENGINE&#x3D;InnoDB DEFAULT CHARSET&#x3D;latin1;</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1201’, ‘2356742’, ‘<a href="mailto:&#103;&#111;&#x70;&#x61;&#108;&#64;&#x74;&#112;&#46;&#x63;&#111;&#x6d;">&#103;&#111;&#x70;&#x61;&#108;&#64;&#x74;&#112;&#46;&#x63;&#111;&#x6d;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1202’, ‘1661663’, ‘<a href="mailto:&#109;&#97;&#x6e;&#x69;&#115;&#104;&#x61;&#64;&#x74;&#x70;&#46;&#x63;&#x6f;&#x6d;">&#109;&#97;&#x6e;&#x69;&#115;&#104;&#x61;&#64;&#x74;&#x70;&#46;&#x63;&#x6f;&#x6d;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1203’, ‘8887776’, ‘<a href="mailto:&#107;&#x68;&#x61;&#x6c;&#105;&#108;&#x40;&#97;&#99;&#46;&#99;&#x6f;&#x6d;">&#107;&#x68;&#x61;&#x6c;&#105;&#108;&#x40;&#97;&#99;&#46;&#99;&#x6f;&#x6d;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1204’, ‘9988774’, ‘<a href="mailto:&#112;&#x72;&#97;&#115;&#x61;&#x6e;&#116;&#104;&#x40;&#x61;&#x63;&#x2e;&#x63;&#x6f;&#x6d;">&#112;&#x72;&#97;&#115;&#x61;&#x6e;&#116;&#104;&#x40;&#x61;&#x63;&#x2e;&#x63;&#x6f;&#x6d;</a>‘);</p>
-<p>INSERT INTO <code>emp_conn</code> VALUES (‘1205’, ‘1231231’, ‘<a href="mailto:&#x6b;&#x72;&#97;&#110;&#x74;&#104;&#105;&#x40;&#x74;&#112;&#x2e;&#x63;&#x6f;&#109;">&#x6b;&#x72;&#97;&#110;&#x74;&#104;&#105;&#x40;&#x74;&#112;&#x2e;&#x63;&#x6f;&#109;</a>‘);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps157.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps158.jpg" alt="img"> </p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1201’, ‘2356742’, ‘<a href="mailto:&#103;&#x6f;&#x70;&#x61;&#x6c;&#64;&#116;&#112;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x6f;&#x70;&#x61;&#x6c;&#64;&#116;&#112;&#x2e;&#x63;&#x6f;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1202’, ‘1661663’, ‘<a href="mailto:&#109;&#97;&#110;&#105;&#x73;&#104;&#97;&#x40;&#116;&#x70;&#x2e;&#99;&#111;&#x6d;">&#109;&#97;&#110;&#105;&#x73;&#104;&#97;&#x40;&#116;&#x70;&#x2e;&#99;&#111;&#x6d;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1203’, ‘8887776’, ‘<a href="mailto:&#x6b;&#x68;&#x61;&#108;&#105;&#x6c;&#64;&#97;&#x63;&#46;&#x63;&#111;&#109;">&#x6b;&#x68;&#x61;&#108;&#105;&#x6c;&#64;&#97;&#x63;&#46;&#x63;&#111;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1204’, ‘9988774’, ‘<a href="mailto:&#x70;&#x72;&#x61;&#x73;&#97;&#110;&#x74;&#x68;&#x40;&#x61;&#x63;&#46;&#x63;&#x6f;&#109;">&#x70;&#x72;&#x61;&#x73;&#97;&#110;&#x74;&#x68;&#x40;&#x61;&#x63;&#46;&#x63;&#x6f;&#109;</a>‘);</p>
+<p>INSERT INTO <code>emp_conn</code> VALUES (‘1205’, ‘1231231’, ‘<a href="mailto:&#107;&#114;&#97;&#x6e;&#x74;&#x68;&#105;&#x40;&#x74;&#x70;&#x2e;&#x63;&#111;&#x6d;">&#107;&#114;&#97;&#x6e;&#x74;&#x68;&#105;&#x40;&#x74;&#x70;&#x2e;&#x63;&#111;&#x6d;</a>‘);</p>
+<p><img src="/sqoop/clip_image020.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image022.jpg" alt="img"></p>
 <p>（2）全量导入mysql表数据到HDFS</p>
 <p>1）example1</p>
 <p>运用下面的命令用于从MySQL数据库服务器中的emp表导入HDFS</p>
@@ -184,17 +184,17 @@
 <p>–delete-target-dir \</p>
 <p>–target-dir &#x2F;sqoop&#x2F;sqoopresult \</p>
 <p>–table emp –m 1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps159.png" alt="img"> </p>
+<p><img src="/sqoop/clip_image024.jpg" alt="img"></p>
 <p>在hdfs上查看</p>
 <p>hdfs dfs -cat &#x2F;sqoop&#x2F;sqoopresult&#x2F;part-m-00000</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps160.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image026.jpg" alt="img"></p>
 <p>2）example2</p>
 <p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –target-dir &#x2F;sqoop&#x2F;sqoopresult2 –fields-terminated-by ‘\t’ –table emp –m 1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps161.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image028.jpg" alt="img"></p>
 <p>3）example3</p>
 <p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –target-dir &#x2F;sqoop&#x2F;sqoopresult3 –fields-terminated-by ‘\t’ –split-by id –table emp –m 2</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps162.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps163.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image030.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image032.jpg" alt="img"></p>
 <p>（3）全量导入mysql表数据到hive</p>
 <p>直接复制表结构数据到hive中</p>
 <p>bin&#x2F;sqoop import \</p>
@@ -205,7 +205,7 @@
 <p>–hive-import \</p>
 <p>–m 1 \</p>
 <p>–hive-database sqoop_test;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps164.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image034.jpg" alt="img"></p>
 <p>（3）导入表数据子集(where过滤)</p>
 <p>bin&#x2F;sqoop import \</p>
 <p>–connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb \</p>
@@ -214,11 +214,11 @@
 <p>–where “city &#x3D;’sec-bad’” \</p>
 <p>–target-dir &#x2F;sqoop&#x2F;wherequery \</p>
 <p>–table emp_add –m 1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps165.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps166.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image036.png" alt="img"></p>
+<p><img src="/sqoop/clip_image038.jpg" alt="img"></p>
 <p>（4）导入表数据子集(query查询)</p>
-<p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –target-dir &#x2F;sqoop&#x2F;wherequery2 –query ‘select id,name,deg from emp WHERE  id&gt;1203 and $CONDITIONS’ –split-by id –fields-terminated-by ‘\001’ –m 2</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps167.jpg" alt="img"> </p>
+<p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –target-dir &#x2F;sqoop&#x2F;wherequery2 –query ‘select id,name,deg from emp WHERE id&gt;1203 and $CONDITIONS’ –split-by id –fields-terminated-by ‘\001’ –m 2</p>
+<p><img src="/sqoop/clip_image040.png" alt="img"></p>
 <p>（5）增量导入</p>
 <p>1）Append模式增量导入</p>
 <p>执行以下指令先将我们之前的数据导入</p>
@@ -228,52 +228,52 @@
 <p>–password hadoop \</p>
 <p>–target-dir &#x2F;sqoop&#x2F;appendresult \</p>
 <p>–table emp –m 1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps168.png" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps169.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image042.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image044.jpg" alt="img"></p>
 <p>在mysql的emp表中插入2条数据</p>
 <p>insert into <code>userdb</code>.<code>emp</code> (<code>id</code>, <code>name</code>, <code>deg</code>, <code>salary</code>, <code>dept</code>) values (‘1206’, ‘allen’, ‘admin’, ‘30000’, ‘tp’);</p>
 <p>insert into <code>userdb</code>.<code>emp</code> (<code>id</code>, <code>name</code>, <code>deg</code>, <code>salary</code>, <code>dept</code>) values (‘1207’, ‘woon’, ‘admin’, ‘40000’, ‘tp’);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps170.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps171.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image046.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image048.jpg" alt="img"></p>
 <p>执行如下的指令，实现增量的导入</p>
 <p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table emp –m 1 –target-dir &#x2F;sqoop&#x2F;appendresult –incremental append –check-column id –last-value 1205</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps172.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image050.jpg" alt="img"></p>
 <p>2）Lastmodified模式增量导入</p>
 <p>创建一个customer表，指定一个时间戳字段</p>
 <p>create table customertest(id int,name varchar(20),last_mod timestamp default current_timestamp on update current_timestamp);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps173.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image052.jpg" alt="img"></p>
 <p>插入如下记录</p>
 <p>insert into customertest(id,name) values(1,’neil’);</p>
 <p>insert into customertest(id,name) values(2,’jack’);</p>
 <p>insert into customertest(id,name) values(3,’martin’);</p>
 <p>insert into customertest(id,name) values(4,’tony’);</p>
 <p>insert into customertest(id,name) values(5,’eric’);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps174.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image054.jpg" alt="img"></p>
 <p>执行sqoop指令将数据导入hdfs</p>
 <p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –target-dir &#x2F;sqoop&#x2F;lastmodifiedresult –table customertest –m 1</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps175.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image056.jpg" alt="img"></p>
 <p>再次插入一条数据进入customertest表</p>
 <p>insert into customertest(id,name) values(6,’james’);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps176.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image058.jpg" alt="img"></p>
 <p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table customertest –target-dir &#x2F;sqoop&#x2F;lastmodifiedresult –check-column last_mod –incremental lastmodified –last-value “2019-05-28 18:42:06” –m 1 –append</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps177.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image060.jpg" alt="img"></p>
 <p>（3）Lastmodified模式:append、merge-key</p>
 <p>更新 id为1的name字段</p>
 <p>update customertest set name &#x3D; ‘Neil’ where id &#x3D; 1;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps178.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image062.jpg" alt="img"></p>
 <p>执行如下指令，把id字段作为merge-key</p>
 <p>bin&#x2F;sqoop import –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table customertest –target-dir &#x2F;sqoop&#x2F;lastmodifiedresult –check-column last_mod –incremental lastmodified –last-value “2019-05-28 18:42:06” –m 1 –merge-key id</p>
 <p>可以看到生成的part-r-00000 的id&#x3D;1的name已经得到修改</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps179.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image064.jpg" alt="img"></p>
 <p>3.Sqoop导出</p>
 <p>（1）默认模式导出HDFS数据到mysql</p>
 <p>1）准备HDFS数据</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps180.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image066.jpg" alt="img"></p>
 <p>上传到hdfs</p>
 <p>hadoop fs -mkdir &#x2F;sqoop&#x2F;emp_data</p>
 <p>hadoop fs -put emp_data.txt &#x2F;sqoop&#x2F;emp_data</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps181.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps182.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image068.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image070.jpg" alt="img"></p>
 <p>2）手动创建mysql中的目标表</p>
 <p>use userdb;</p>
 <p>create table employee ( </p>
@@ -282,44 +282,44 @@
 <p>  deg varchar(20),</p>
 <p>  salary int,</p>
 <p>  dept varchar(10));</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps183.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image072.jpg" alt="img"></p>
 <p>3）执行导出命令</p>
 <p>bin&#x2F;sqoop export –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table employee –columns id,name,deg,salary,dept –export-dir &#x2F;sqoop&#x2F;emp_data&#x2F;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps184.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image074.jpg" alt="img"></p>
 <p>（2）更新导出（updateonly模式）</p>
 <p>1）准备HDFS数据</p>
 <p>在HDFS文件系统中&#x2F;sqoop&#x2F;updateonly_1&#x2F;目录的下创建一个文件updateonly_1.txt</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps185.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image076.jpg" alt="img"></p>
 <p>2）手动创建mysql中的目标表</p>
 <p>CREATE TABLE updateonly ( </p>
 <p>  id INT NOT NULL PRIMARY KEY, </p>
 <p>  name VARCHAR(20), </p>
 <p>  deg VARCHAR(20),</p>
 <p>  salary INT);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps186.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image078.jpg" alt="img"></p>
 <p>3）执行全部导出操作</p>
 <p>bin&#x2F;sqoop export –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table updateonly –export-dir &#x2F;sqoop&#x2F;updateonly_1&#x2F;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps187.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image080.jpg" alt="img"></p>
 <p>4）查看mysql中的数据</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps188.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image082.jpg" alt="img"></p>
 <p>5）新增一个文件</p>
 <p>新增一个文件updateonly_2.txt：<strong>修改了前三条数据并且新增了一条记录</strong></p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps189.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image084.jpg" alt="img"></p>
 <p>hadoop fs -mkdir &#x2F;sqoop&#x2F;updateonly_2</p>
 <p>hadoop fs -put updateonly_2.txt &#x2F;sqoop&#x2F;updateonly_2</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps190.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image086.jpg" alt="img"></p>
 <p>6）执行更新导出</p>
 <p>bin&#x2F;sqoop export –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table updateonly –export-dir &#x2F;sqoop&#x2F;updateonly_2 –update-key id –update-mode updateonly</p>
 <p>7）查看结果</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps191.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image088.jpg" alt="img"></p>
 <p>查看mysql表</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps192.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image090.jpg" alt="img"></p>
 <p>日志显示四条数据，但是表中只有三条，证明只进行了更新</p>
 <p>（3）更新导出（allowinsert模式）</p>
 <p>1）准备HDFS数据</p>
 <p>在HDFS &#x2F;sqoop&#x2F;allowinsert_1&#x2F;目录的下创建一个文件allowinsert_1.txt</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps193.jpg" alt="img"> </p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps194.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image092.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image094.jpg" alt="img"></p>
 <p>2）手动创建mysql中的目标表</p>
 <p>USE userdb;</p>
 <p>CREATE TABLE allowinsert ( </p>
@@ -327,20 +327,20 @@
 <p>  name VARCHAR(20), </p>
 <p>  deg VARCHAR(20),</p>
 <p>  salary INT);</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps195.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image096.jpg" alt="img"></p>
 <p>3）执行全部导出操作</p>
 <p>bin&#x2F;sqoop export –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table allowinsert –export-dir &#x2F;sqoop&#x2F;allowinsert_1&#x2F;</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps196.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image098.jpg" alt="img"></p>
 <p>4）查看mysql中的数据</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps197.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image100.jpg" alt="img"></p>
 <p>5）新增文件</p>
 <p>创建文件allowinsert_2.txt。修改前三条数据并且新增了一条记录。上传至 &#x2F;sqoop&#x2F;allowinsert_2&#x2F;目录下</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps198.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image102.jpg" alt="img"></p>
 <p>6）执行更新导出</p>
 <p>bin&#x2F;sqoop export –connect jdbc:mysql:&#x2F;&#x2F;node2:3306&#x2F;userdb –username root –password hadoop –table allowinsert –export-dir &#x2F;sqoop&#x2F;allowinsert_2&#x2F; –update-key id –update-mode allowinsert</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps199.jpg" alt="img"> </p>
+<p><img src="/sqoop/clip_image104.jpg" alt="img"></p>
 <p>7）查看结果</p>
-<p><img src="file:///C:\Users\8\AppData\Local\Temp\ksohtml14960\wps200.jpg" alt="img"></p>
+<p><img src="/sqoop/clip_image106.jpg" alt="img"></p>
 
 	</div>
 </article>
